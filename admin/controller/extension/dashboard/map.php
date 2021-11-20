@@ -67,6 +67,25 @@ class ControllerExtensionDashboardMap extends Controller {
 		} else {
 			$data['dashboard_map_sort_order'] = $this->config->get('dashboard_map_sort_order');
 		}
+        
+        if (isset($this->request->post['dashboard_map_country'])) {
+			$data['dashboard_map_country'] = $this->request->post['dashboard_map_country'];
+		} else {
+			$data['dashboard_map_country'] = $this->config->get('dashboard_map_country');
+		}
+        
+        $files = glob(DIR_APPLICATION . 'view/javascript/jquery/jqvmap/maps/jquery.vmap.*.js');
+        
+        $data['countrys'] = [];
+        foreach ($files as $file) {
+            
+            $name = str_replace(['jquery.vmap.', '.js'], '', basename($file));
+            
+            $data['countrys'][] = [
+                'name' => ucfirst($name),
+                'value' => $name
+            ];
+        }
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
@@ -87,6 +106,11 @@ class ControllerExtensionDashboardMap extends Controller {
 		$this->load->language('extension/dashboard/map');
 
 		$data['user_token'] = $this->session->data['user_token'];
+        
+        $data['country'] = $this->config->get('dashboard_map_country');
+        
+        if($data['country'] != 'world')
+            $data['heading_title'] = ucfirst($data['country']);
 		
 		return $this->load->view('extension/dashboard/map_info', $data);
 	}
