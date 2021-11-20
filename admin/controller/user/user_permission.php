@@ -55,6 +55,7 @@ class ControllerUserUserPermission extends Controller {
 		$this->load->model('user/user_group');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+            
 			$this->model_user_user_group->editUserGroup($this->request->get['user_group_id'], $this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -347,22 +348,59 @@ class ControllerUserUserPermission extends Controller {
 
 		// Sort the file array
 		sort($files);
+        
+        $language = new Language($this->config->get('config_language'));
 					
 		foreach ($files as $file) {
 			$controller = substr($file, strlen(DIR_APPLICATION . 'controller/'));
-
+            
 			$permission = substr($controller, 0, strrpos($controller, '.'));
+            
+            $names = $language->load($permission, $permission);
 			
 			$hidefiles = explode("/", $permission);
-            
+            if(count($hidefiles) <=1)continue;
 			if ($hidefiles[1] == "module" or $hidefiles[1] == "payment" or $hidefiles[1] == "shipping") {
 				if (!in_array($permission, $ignore)) {
-					$data['hiden'][] = $permission;
+                    
+                    if(isset($names[$permission]) && !empty($names[$permission]->get('heading_title')) && $names[$permission]->get('heading_title') != 'heading_title'){
+                
+                        $data['hiden'][] = [
+                            'name' => $names[$permission]->get('heading_title'). '('. $permission .') ',
+                            'value' => $permission
+                        ];
+
+                    }else{
+
+                        $data['hiden'][] = [
+                            'name' => $permission,
+                            'value' => $permission
+                        ];
+
+                    }
 				}
 			}
 			if (!in_array($permission, $ignore)) {
-				$data['permissions'][] = $permission;
+                
+                if(isset($names[$permission]) && !empty($names[$permission]->get('heading_title')) && $names[$permission]->get('heading_title') != 'heading_title'){
+                
+                    $data['permissions'][] = [
+                        'name' => $names[$permission]->get('heading_title'). '('. $permission .') ',
+                        'value' => $permission
+                    ];
+                    
+                }else{
+                    
+                    $data['permissions'][] = [
+                        'name' => $permission,
+                        'value' => $permission
+                    ];
+                    
+                }
+                
 			}
+            
+            unset($names[$permission]);
 		}
 		
 		if (isset($this->request->post['permission']['hiden'])) {

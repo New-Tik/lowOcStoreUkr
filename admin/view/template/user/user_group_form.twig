@@ -42,11 +42,11 @@
                 <div class="checkbox">
                   <label>
                     {% if permission in access %}
-                    <input type="checkbox" name="permission[access][]" value="{{ permission }}" checked="checked" />
-                    {{ permission }}
+                    <input type="checkbox" name="permission[access][]" value="{{ permission.value }}" checked="checked" />
+                    {{ permission.name }}
                     {% else %}
-                    <input type="checkbox" name="permission[access][]" value="{{ permission }}" />
-                    {{ permission }}
+                    <input type="checkbox" name="permission[access][]" value="{{ permission.value }}" />
+                    {{ permission.name }}
                     {% endif %}
                   </label>
                 </div>
@@ -62,11 +62,11 @@
                 <div class="checkbox">
                   <label>
                     {% if permission in modify %}
-                    <input type="checkbox" name="permission[modify][]" value="{{ permission }}" checked="checked" />
-                    {{ permission }}
+                    <input type="checkbox" name="permission[modify][]" value="{{ permission.value }}" checked="checked" />
+                    {{ permission.name }}
                     {% else %}
-                    <input type="checkbox" name="permission[modify][]" value="{{ permission }}" />
-                    {{ permission }}
+                    <input type="checkbox" name="permission[modify][]" value="{{ permission.value }}" />
+                    {{ permission.name }}
                     {% endif %}
                   </label>
                 </div>
@@ -82,11 +82,11 @@
                 <div class="checkbox">
                   <label>
                     {% if hide in ishide %}
-                    <input type="checkbox" name="permission[hiden][]" value="{{ hide }}" checked="checked" />
-                    {{ hide }}
+                    <input type="checkbox" name="permission[hiden][]" value="{{ hide.value }}" checked="checked" />
+                    {{ hide.name }}
                     {% else %}
-                    <input type="checkbox" name="permission[hiden][]" value="{{ hide }}" />
-                    {{ hide }}
+                    <input type="checkbox" name="permission[hiden][]" value="{{ hide.value }}" />
+                    {{ hide.name }}
                     {% endif %}
                   </label>
                 </div>
