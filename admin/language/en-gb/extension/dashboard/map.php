@@ -13,6 +13,7 @@ $_['text_sale']        = 'Sales';
 $_['entry_status']     = 'Status';
 $_['entry_sort_order'] = 'Sort Order';
 $_['entry_width']      = 'Width';
+$_['entry_country']      = 'Country Or World';
 
 // Error
 $_['error_permission'] = 'Warning: You do not have permission to modify dashboard map!';

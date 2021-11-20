@@ -16,6 +16,7 @@ $_['text_sale']        = 'Продаж';
 $_['entry_status']     = 'Статус';
 $_['entry_sort_order'] = 'Порядок сортировки';
 $_['entry_width']      = 'Ширина';
+$_['entry_country']      = 'Страна или мир';
 
 // Error
 $_['error_permission'] = 'У вас недостаточно прав для внесения изменений!';
