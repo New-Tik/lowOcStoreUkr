@@ -20,7 +20,7 @@ class ControllerCatalogRecurring extends Controller {
 		$this->load->model('catalog/recurring');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_catalog_recurring->addRecurring($this->request->post);
+			$this->request->get['recurring_id'] = $this->model_catalog_recurring->addRecurring($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -37,7 +37,7 @@ class ControllerCatalogRecurring extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('catalog/recurring', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 
@@ -69,7 +69,7 @@ class ControllerCatalogRecurring extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('catalog/recurring', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 

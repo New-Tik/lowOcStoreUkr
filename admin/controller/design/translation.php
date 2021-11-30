@@ -20,7 +20,7 @@ class ControllerDesignTranslation extends Controller {
 		$this->load->model('design/translation');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_design_translation->addTranslation($this->request->post);
+			$this->request->get['translation_id'] = $this->model_design_translation->addTranslation($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -37,7 +37,7 @@ class ControllerDesignTranslation extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('design/translation', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 
@@ -69,7 +69,7 @@ class ControllerDesignTranslation extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('design/translation', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 

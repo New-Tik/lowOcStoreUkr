@@ -23,7 +23,7 @@ class ControllerBlogReview extends Controller {
 		$this->load->model('blog/review');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_blog_review->addReview($this->request->post);
+			$this->request->get['review_article_id'] = $this->model_blog_review->addReview($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -56,7 +56,8 @@ class ControllerBlogReview extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-
+            
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('blog/review', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 
@@ -104,7 +105,8 @@ class ControllerBlogReview extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-
+            
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('blog/review', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 

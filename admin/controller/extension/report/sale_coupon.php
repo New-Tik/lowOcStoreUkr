@@ -12,6 +12,7 @@ class ControllerExtensionReportSaleCoupon extends Controller {
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=report', true));
 		}
 

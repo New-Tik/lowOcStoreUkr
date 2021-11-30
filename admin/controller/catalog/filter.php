@@ -20,7 +20,7 @@ class ControllerCatalogFilter extends Controller {
 		$this->load->model('catalog/filter');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_catalog_filter->addFilter($this->request->post);
+			$this->request->get['filter_group_id'] = $this->model_catalog_filter->addFilter($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -37,7 +37,7 @@ class ControllerCatalogFilter extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('catalog/filter', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 
@@ -52,7 +52,7 @@ class ControllerCatalogFilter extends Controller {
 		$this->load->model('catalog/filter');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_catalog_filter->editFilter($this->request->get['filter_group_id'], $this->request->post);
+			$this->request->get['length'] = $this->model_catalog_filter->editFilter($this->request->get['filter_group_id'], $this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -69,7 +69,7 @@ class ControllerCatalogFilter extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('catalog/filter', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 

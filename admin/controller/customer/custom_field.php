@@ -20,7 +20,7 @@ class ControllerCustomerCustomField extends Controller {
 		$this->load->model('customer/custom_field');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_customer_custom_field->addCustomField($this->request->post);
+			$this->request->get['custom_field_id'] = $this->model_customer_custom_field->addCustomField($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -37,7 +37,7 @@ class ControllerCustomerCustomField extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('customer/custom_field', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 
@@ -69,7 +69,7 @@ class ControllerCustomerCustomField extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('customer/custom_field', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 

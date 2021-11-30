@@ -13,7 +13,7 @@ class ControllerExtensionAnalyticsGoogle extends Controller {
 			$this->model_setting_setting->editSetting('analytics_google', $this->request->post, $this->request->get['store_id']);
 
 			$this->session->data['success'] = $this->language->get('text_success');
-
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=analytics', true));
 		}
 

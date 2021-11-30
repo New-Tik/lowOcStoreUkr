@@ -32,6 +32,7 @@
         <div class="tab-content">
           <div class="tab-pane active" id="tab-backup">
             <form action="{{ export }}" method="post" enctype="multipart/form-data" id="form-export" class="form-horizontal">
+                <input type="hidden" name="apply" value="0"/>
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{ entry_export }}</label>
                 <div class="col-sm-10">

@@ -20,7 +20,7 @@ class ControllerLocalisationLanguage extends Controller {
 		$this->load->model('localisation/language');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_localisation_language->addLanguage($this->request->post);
+			$this->request->get['language_id'] = $this->model_localisation_language->addLanguage($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -38,6 +38,7 @@ class ControllerLocalisationLanguage extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('localisation/language', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 
@@ -70,6 +71,7 @@ class ControllerLocalisationLanguage extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('localisation/language', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 

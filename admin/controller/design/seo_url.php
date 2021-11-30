@@ -20,7 +20,7 @@ class ControllerDesignSeoUrl extends Controller {
 		$this->load->model('design/seo_url');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_design_seo_url->addSeoUrl($this->request->post);
+			$this->request->get['seo_url_id'] = $this->model_design_seo_url->addSeoUrl($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -53,7 +53,7 @@ class ControllerDesignSeoUrl extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('design/seo_url', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 
@@ -101,7 +101,7 @@ class ControllerDesignSeoUrl extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('design/seo_url', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 

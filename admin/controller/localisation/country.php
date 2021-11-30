@@ -20,7 +20,7 @@ class ControllerLocalisationCountry extends Controller {
 		$this->load->model('localisation/country');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_localisation_country->addCountry($this->request->post);
+			$this->request->get['country_id'] = $this->model_localisation_country->addCountry($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -38,6 +38,7 @@ class ControllerLocalisationCountry extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('localisation/country', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 
@@ -70,6 +71,7 @@ class ControllerLocalisationCountry extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('localisation/country', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 

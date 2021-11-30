@@ -20,7 +20,7 @@ class ControllerCatalogAttributeGroup extends Controller {
 		$this->load->model('catalog/attribute_group');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_catalog_attribute_group->addAttributeGroup($this->request->post);
+			$this->request->get['attribute_group_id'] = $this->model_catalog_attribute_group->addAttributeGroup($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -37,7 +37,7 @@ class ControllerCatalogAttributeGroup extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('catalog/attribute_group', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 
@@ -69,7 +69,7 @@ class ControllerCatalogAttributeGroup extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('catalog/attribute_group', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 

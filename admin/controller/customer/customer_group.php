@@ -20,7 +20,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 		$this->load->model('customer/customer_group');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_customer_customer_group->addCustomerGroup($this->request->post);
+			$this->request->get['customer_group_id'] = $this->model_customer_customer_group->addCustomerGroup($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -37,7 +37,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('customer/customer_group', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 
@@ -69,7 +69,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('customer/customer_group', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 

@@ -23,7 +23,7 @@ class ControllerUserUserPermission extends Controller {
 		$this->load->model('user/user_group');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_user_user_group->addUserGroup($this->request->post);
+			$this->request->get['user_group_id'] = $this->model_user_user_group->addUserGroup($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -41,6 +41,7 @@ class ControllerUserUserPermission extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('user/user_permission', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 
@@ -74,6 +75,7 @@ class ControllerUserUserPermission extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('user/user_permission', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 

@@ -24,7 +24,7 @@ class ControllerExtensionDashboardDomovoy extends Controller
             $this->model_setting_setting->editSetting('dashboard_domovoy', $this->request->post);
 
             $this->session->data['success'] = $this->language->get('text_success');
-
+            if(!$this->request->post['apply'])
             $this->response->redirect($this->url->link('common/dashboard', 'user_token=' . $this->session->data['user_token'], true));
         }
 

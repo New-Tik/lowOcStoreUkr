@@ -14,7 +14,7 @@ class ControllerExtensionModuleFeaturedProduct extends Controller {
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			if (!isset($this->request->get['module_id'])) {
-				$this->model_setting_module->addModule('featured_product', $this->request->post);
+				$this->request->get['module_id'] = $this->model_setting_module->addModule('featured_product', $this->request->post);
 			} else {
 				$this->model_setting_module->editModule($this->request->get['module_id'], $this->request->post);
 			}
@@ -23,6 +23,7 @@ class ControllerExtensionModuleFeaturedProduct extends Controller {
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module', true));
 		}
 

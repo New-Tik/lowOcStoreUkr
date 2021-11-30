@@ -25,7 +25,7 @@ class ControllerBlogCategory extends Controller {
 		$this->load->model('blog/category');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_blog_category->addCategory($this->request->post);
+			$this->request->get['blog_category_id'] = $this->model_blog_category->addCategory($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -42,7 +42,8 @@ class ControllerBlogCategory extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-
+            
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('blog/category', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 
@@ -74,7 +75,8 @@ class ControllerBlogCategory extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-
+            
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('blog/category', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 

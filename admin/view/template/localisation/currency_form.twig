@@ -3,6 +3,8 @@
   <div class="page-header">
     <div class="container-fluid">
       <div class="pull-right">
+          <button onclick='$("[name=\"apply\"]").attr("value", 1);
+                    $("#form-module").submit();' data-toggle="tooltip" title="" class="btn btn-success" data-original-title="{{ button_apply }}"><i class="fa fa-check"></i></button>
         <button type="submit" form="form-currency" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
         <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
       <h1>{{ heading_title }}</h1>
@@ -26,6 +28,7 @@
       </div>
       <div class="panel-body">
         <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-currency" class="form-horizontal">
+            <input type="hidden" name="apply" value="0"/>
           <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-title">{{ entry_title }}</label>
             <div class="col-sm-10">

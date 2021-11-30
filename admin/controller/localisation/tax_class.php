@@ -20,7 +20,7 @@ class ControllerLocalisationTaxClass extends Controller {
 		$this->load->model('localisation/tax_class');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_localisation_tax_class->addTaxClass($this->request->post);
+			$this->request->get['tax_class_id'] = $this->model_localisation_tax_class->addTaxClass($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -38,6 +38,7 @@ class ControllerLocalisationTaxClass extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('localisation/tax_class', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 
@@ -70,6 +71,7 @@ class ControllerLocalisationTaxClass extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('localisation/tax_class', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 

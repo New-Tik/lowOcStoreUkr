@@ -20,7 +20,7 @@ class ControllerLocalisationGeoZone extends Controller {
 		$this->load->model('localisation/geo_zone');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_localisation_geo_zone->addGeoZone($this->request->post);
+			$this->request->get['geo_zone_id'] = $this->model_localisation_geo_zone->addGeoZone($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -38,6 +38,7 @@ class ControllerLocalisationGeoZone extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('localisation/geo_zone', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 
@@ -70,6 +71,7 @@ class ControllerLocalisationGeoZone extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
+            if(!$this->request->post['apply'])
 			$this->response->redirect($this->url->link('localisation/geo_zone', 'user_token=' . $this->session->data['user_token'] . $url, true));
 		}
 
