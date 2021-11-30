@@ -967,10 +967,10 @@ class ControllerCatalogProduct extends Controller {
 		);
 
 		if (!isset($this->request->get['product_id'])) {
-			$data['action'] = $this->url->link('catalog/product/add', 'user_token=' . $this->session->data['user_token'] . $url, true);
-            $data['href_shop']  = HTTP_CATALOG . 'index.php?route=product/product&product_id=' . $result['product_id'];
+			$data['action'] = $this->url->link('catalog/product/add', 'user_token=' . $this->session->data['user_token'] . $url, true);                        
 		} else {
 			$data['action'] = $this->url->link('catalog/product/edit', 'user_token=' . $this->session->data['user_token'] . '&product_id=' . $this->request->get['product_id'] . $url, true);
+            $data['href_shop']  = HTTP_CATALOG . 'index.php?route=product/product&product_id=' . $this->request->get['product_id'];
 		}
 
 		$data['cancel'] = $this->url->link('catalog/product', 'user_token=' . $this->session->data['user_token'] . $url, true);
