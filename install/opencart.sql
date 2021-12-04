@@ -1542,6 +1542,8 @@ CREATE TABLE `oc_module` (
   `name` varchar(64) NOT NULL,
   `code` varchar(32) NOT NULL,
   `setting` text NOT NULL,
+  `date_added` DATETIME NOT NULL,
+  `date_modified` DATETIME NOT NULL,
   PRIMARY KEY (`module_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

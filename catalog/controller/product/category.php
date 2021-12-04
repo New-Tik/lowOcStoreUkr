@@ -137,6 +137,8 @@ class ControllerProductCategory extends Controller {
 
 			$this->document->setDescription($category_info['meta_description']);
 			$this->document->setKeywords($category_info['meta_keyword']);
+            
+            $this->document->setSeoLastModified($category_info['date_modified']);
 
 			$data['text_compare'] = sprintf($this->language->get('text_compare'), (isset($this->session->data['compare']) ? count($this->session->data['compare']) : 0));
 

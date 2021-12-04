@@ -20,6 +20,43 @@ class Document {
 	private $styles = array();
 	private $scripts = array();
 	private $og_image;
+    
+    private $seo_last_modified = false;
+    
+    public function __construct() {
+		
+		$IfModifiedSince = strtotime("-365 day");
+        if (isset($_ENV['HTTP_IF_MODIFIED_SINCE']))
+            $IfModifiedSince = strtotime(substr($_ENV['HTTP_IF_MODIFIED_SINCE'], 5));
+
+        if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']))
+            $IfModifiedSince = strtotime(substr($_SERVER['HTTP_IF_MODIFIED_SINCE'], 5));
+		
+		$this->seo_last_modified = $IfModifiedSince;
+        
+    }
+
+    public function getSeoLastModified() {
+		return $this->seo_last_modified;
+	}
+	
+	public function OutputSeoLastModified() {		
+		$date = new DateTime();		
+		if ($date->getTimestamp() > $this->seo_last_modified)
+            header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
+        $date->setTimestamp($this->seo_last_modified);
+		header('Last-Modified: ' . $date->format("D, d M Y H:i:s \G\M\T"));
+	}
+	
+	 public function setSeoLastModified($seo_last_modified) {		
+		if(empty($seo_last_modified))return;		
+        $seo_last_modified = strtotime($seo_last_modified);		
+        if($seo_last_modified > $this->seo_last_modified)
+            $this->seo_last_modified = $seo_last_modified;
+		else			
+			$this->seo_last_modified = $seo_last_modified; 
+		
+    }
 
 	/**
      * 
