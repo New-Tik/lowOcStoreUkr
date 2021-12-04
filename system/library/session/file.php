@@ -69,7 +69,9 @@ class File {
 
 			foreach ($files as $file) {
 				if (filemtime($file) < $expire) {
-					unlink($file);
+					if (!@unlink($file)) {
+                        clearstatcache(false, $file);
+                    }
 				}
 			}
 		}
