@@ -42,8 +42,8 @@ class Document {
 	
 	public function OutputSeoLastModified() {		
 		$date = new DateTime();		
-		if ($date->getTimestamp() > $this->seo_last_modified)
-            header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
+//		if ($date->getTimestamp() > $this->seo_last_modified)
+//            header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
         $date->setTimestamp($this->seo_last_modified);
 		header('Last-Modified: ' . $date->format("D, d M Y H:i:s \G\M\T"));
 	}
