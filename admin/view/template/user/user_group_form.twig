@@ -3,8 +3,6 @@
   <div class="page-header">
     <div class="container-fluid">
       <div class="pull-right">
-          <button onclick='$("[name=\"apply\"]").attr("value", 1);
-                    $("form").submit();' data-toggle="tooltip" title="" class="btn btn-success" data-original-title="{{ button_apply }}"><i class="fa fa-check"></i></button>
         <button type="submit" form="form-user-group" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
         <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
       <h1>{{ heading_title }}</h1>
@@ -27,7 +25,6 @@
       </div>
       <div class="panel-body">
         <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-user-group" class="form-horizontal">
-            <input type="hidden" name="apply" value="0"/>
           <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
             <div class="col-sm-10">
@@ -44,7 +41,7 @@
                 {% for permission in permissions %}
                 <div class="checkbox">
                   <label>
-                    {% if permission in access %}
+                    {% if permission.value in access %}
                     <input type="checkbox" name="permission[access][]" value="{{ permission.value }}" checked="checked" />
                     {{ permission.name }}
                     {% else %}
@@ -64,7 +61,7 @@
                 {% for permission in permissions %}
                 <div class="checkbox">
                   <label>
-                    {% if permission in modify %}
+                    {% if permission.value in modify %}
                     <input type="checkbox" name="permission[modify][]" value="{{ permission.value }}" checked="checked" />
                     {{ permission.name }}
                     {% else %}
@@ -84,7 +81,7 @@
                 {% for hide in hiden %}
                 <div class="checkbox">
                   <label>
-                    {% if hide in ishide %}
+                    {% if hide.value in ishide %}
                     <input type="checkbox" name="permission[hiden][]" value="{{ hide.value }}" checked="checked" />
                     {{ hide.name }}
                     {% else %}
